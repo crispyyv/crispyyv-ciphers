@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import "./mixins.scss";
+@import "./colors.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background: #41b4f6;
+}
+
+.center {
+  max-width: 1044px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.form {
+  @include flex;
+
+  &__choice {
+    @include flex(row, space-between);
+    max-width: 550px;
+    width: 100%;
+    #isDecrypt {
+      @include toggle-button;
+      margin-left: 10px;
+    }
+  }
+  @include input-styles;
+
+  &__button {
+    position: relative;
+    padding: 8px 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    font-size: 18px;
+    margin: 1em 0.8em;
+
+    color: $color1;
+    &::after,
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 20%;
+      height: 20%;
+      border: 2px solid;
+      transition: all 0.6s ease;
+      border-radius: 2px;
+    }
+    &:hover {
+      color: $color;
+    }
+    &::after {
+      bottom: 0;
+      right: 0;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      border-bottom-color: $color1;
+      border-right-color: $color1;
+    }
+
+    &::before {
+      top: 0;
+      left: 0;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+      border-top-color: $color1;
+      border-left-color: $color1;
+    }
+
+    &:hover:after,
+    &:hover:before {
+      width: 100%;
+      height: 100%;
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
+    @include transition(all 0.1s);
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}
+
+.result {
+  @include flex(column-reverse);
+
+  li {
+    height: 50px;
+    padding: 15px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    background-color: $body-color;
+  }
+}
