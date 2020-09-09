@@ -4,7 +4,7 @@ import "./styles/main.scss";
 function App() {
   return (
     <div className="center">
-      <h1>Hello in Ceaser Cipher</h1>
+      <h1 className="title">Hello in Ceaser Cipher</h1>
       <Cipher />
     </div>
   );

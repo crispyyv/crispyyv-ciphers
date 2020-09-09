@@ -7,13 +7,14 @@ export const Cipher = () => {
   const [shift, setShift] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [decryptMass, setDecryptMass] = useState([]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isDecrypt) {
       const text = decrypt(decryptText);
       setShowResult(true);
       setDecryptMass(text);
-      console.log(decryptMass);
+      console.log(decryptMass, shift);
     } else {
       const text = encrypt(ecnryptText, shift);
       setEcnryptText(text);
@@ -39,19 +40,22 @@ export const Cipher = () => {
               }}
             />
           </div>
-          <div className="form__shift">
-            <p>Select shift</p>
-            <select
-              value={shift}
-              onChange={(e) => {
-                setShift(e.target.value);
-              }}
-            >
-              {numbers.map((n) => (
-                <option key={n}>{n}</option>
-              ))}
-            </select>
-          </div>
+          {isDecrypt ? null : (
+            <div className="form__shift">
+              <p>Select shift</p>
+
+              <select
+                value={shift}
+                onChange={(e) => {
+                  setShift(parseInt(e.target.value));
+                }}
+              >
+                {numbers.map((n) => (
+                  <option key={n}>{n}</option>
+                ))}
+              </select>
+            </div>
+          )}
         </div>
 
         {isDecrypt ? (
@@ -84,13 +88,22 @@ export const Cipher = () => {
       </form>
 
       {showResult ? (
-        <>
-          <h2>Result of {isDecrypt ? "decrypting" : "encrypting"}</h2>
+        <div className="result">
+          <h2>Result of {isDecrypt ? "decrypting: " : "encrypting: "}</h2>
 
           {isDecrypt ? (
-            <ul className="result">
+            <ul className="result__list">
               {decryptMass.map((val, idx) => (
-                <li key={idx}>
+                <li
+                  key={idx}
+                  className={
+                    shift === 26 - idx
+                      ? "result__correct"
+                      : 26 - idx === 26
+                      ? "result__correct"
+                      : null
+                  }
+                >
                   <strong>Shift alphabet on {26 - idx} symbol</strong>: {val}
                 </li>
               ))}
@@ -98,7 +111,7 @@ export const Cipher = () => {
           ) : (
             <p>{ecnryptText}</p>
           )}
-        </>
+        </div>
       ) : null}
     </>
   );

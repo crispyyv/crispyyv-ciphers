@@ -28,10 +28,7 @@ export const numbers = [
 ];
 
 export const encrypt = (string, num) => {
-  let encrypted = "";
-  let charcode = 0;
   string = string.toLowerCase();
-  num = parseInt(num);
 
   return string
     .split("")
