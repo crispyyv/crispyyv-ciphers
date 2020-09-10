@@ -1,13 +1,27 @@
 import React from "react";
-import { Cipher } from "./components/Cipher";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Ceaser } from "./components/Ceaser";
+import { Home } from "./components/Home";
+import NavBar from "./components/NavBar";
+import { Trithemius } from "./components/Trithemius";
 import "./styles/main.scss";
-function App() {
+export const App = () => {
   return (
-    <div className="center">
-      <h1 className="title">Hello in Ceaser Cipher</h1>
-      <Cipher />
-    </div>
+    <Router>
+      <NavBar />
+      <div className="center">
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/ceaser">
+            <Ceaser />
+          </Route>
+          <Route path="/trithemius">
+            <Trithemius />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
-}
-
-export default App;
+};

@@ -2,21 +2,19 @@
   transition: $trans;
 }
 
-@mixin flex($dir: column, $jc: center) {
+@mixin flex($dir: column, $jc: center, $ai: "") {
   display: flex;
   flex-direction: $dir;
 
   @if $dir == row {
     justify-content: $jc;
+    align-items: unquote($ai);
   } @else if $dir == column {
     align-items: $jc;
+    justify-content: unquote($ai);
   }
 }
 
-@mixin flex-row {
-  display: flex;
-  flex-direction: row;
-}
 @mixin input-styles {
   input {
     max-width: 600px;
