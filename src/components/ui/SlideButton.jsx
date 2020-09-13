@@ -1,13 +1,13 @@
 import React from "react";
 
-export const SlideButton = ({ onChange }) => {
+export const SlideButton = ({ onChange, id, placeholder }) => {
   return (
     <div>
-      <label htmlFor="isDecrypt">Decrypt?</label>
+      <label htmlFor={id}>{placeholder}</label>
       <input
-        id="isDecrypt"
+        id={id}
         type="checkbox"
-        placeholder="Decrypt?"
+        placeholder={placeholder}
         onChange={onChange}
       />
     </div>

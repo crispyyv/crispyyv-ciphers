@@ -29,6 +29,34 @@ body {
   // margin: 20px 0 40px 0;
   @include flex(column, center, center);
   height: 50vh;
+  &__subtitle {
+    margin: 1rem 0;
+    font-size: 1.4rem;
+  }
+  &__links {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+    li {
+      margin-bottom: 0.8rem;
+      cursor: pointer;
+
+      a {
+        transition: all 0.4s;
+      }
+      & a:hover {
+        color: $nav-bg-color;
+      }
+    }
+  }
+  &__special {
+    color: lighten($color: $nav-bg-color, $amount: 5);
+    max-width: 10rem;
+  }
+}
+#quadro,
+#decrypt {
+  @include toggle-button;
 }
 .form {
   @include flex;
@@ -124,7 +152,7 @@ body {
 .background {
   height: 4rem;
   width: 100vw;
-  background-color: lighten($color: $main-color, $amount: 15);
+  background-color: $nav-bg-color;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
   margin-bottom: 40px;
 }
@@ -143,5 +171,19 @@ body {
         color: darken($color3, 30);
       }
     }
+  }
+}
+
+.attention {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.flex-row {
+  @include flex("row");
+  div {
+    margin: 1rem 2rem;
   }
 }

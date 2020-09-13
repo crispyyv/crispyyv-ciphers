@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { decrypt, encrypt } from "../helpers/ceaserHelpers";
 import { CipherForm } from "./layouts/CipherForm";
 import { CipherResult } from "./layouts/CipherResult";
+import { SlideButton } from "./ui/SlideButton";
 import { TextInput } from "./ui/TextInput";
 
 export const Ceaser = () => {
@@ -47,11 +48,15 @@ export const Ceaser = () => {
     <>
       <CipherForm
         isDecrypt={isDecrypt}
-        slideButton={slideButton}
         handleSetShift={handleSetShift}
         handleSubmit={handleSubmit}
         shift={shift}
       >
+        <SlideButton
+          onChange={slideButton}
+          id="decrypt"
+          placeholder="Decrypt?"
+        />
         {isDecrypt ? (
           <TextInput
             placeholder="Decrypt"

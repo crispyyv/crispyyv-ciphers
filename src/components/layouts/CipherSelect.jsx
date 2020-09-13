@@ -1,6 +1,6 @@
 import React from "react";
 import { numbers } from "../../helpers/constants";
-export const CipherSelect = ({ shift, onChange }) => {
+export const CipherSelect = ({ shift, onChange, custom }) => {
   return (
     <div className="form__shift">
       <p>Select key</p>

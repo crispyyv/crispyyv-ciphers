@@ -1,31 +1,36 @@
 import { alphabet } from "./constants";
 
-const find = (array, value) => {
-  if (array.indexOf) {
-    return array.indexOf(value);
-  }
+const n = alphabet.length;
 
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] === value) return i;
-  }
-
-  return -1;
-};
-
-export const encrypt = (key, string) => {
-  const stringMas = [...string.toUpperCase()];
-  console.log(key, string);
+export const trithemiusHelper = (string, a, b, c, encrypt = true) => {
+  const stringMas = [...string];
+  let key;
+  let p;
   let m;
   let outStr = "";
-  if (key === 0) return string;
+  let L;
   for (let i = 0; i < stringMas.length; i++) {
-    m = alphabet.indexOf(stringMas[i]) + 1;
-    console.log(m);
-    if (m !== 0) {
-      outStr = outStr + alphabet[(m + key) % alphabet.length];
+    p = i;
+    if (c) {
+      key = a * p ** 2 + b * p + c;
     } else {
-      outStr = outStr + " ";
+      key = a * p + b;
     }
+    m = alphabet.indexOf(stringMas[i]);
+    L = alphabet[(m + key) % n];
+    console.log("m:", m, "p:", p, "key:", key, "L:", L);
+    outStr += encrypt ? L : alphabet[recurs(m, key) % n];
   }
+
   return outStr;
+};
+
+const recurs = (m, key) => {
+  let i = 0;
+  let res;
+  while (m - key + n * i < 0) {
+    i++;
+    res = m - key + n * i;
+  }
+  return m - key > 0 ? m - key : res;
 };
