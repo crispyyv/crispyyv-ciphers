@@ -55,7 +55,8 @@ body {
   }
 }
 #quadro,
-#decrypt {
+#decrypt,
+#constants {
   @include toggle-button;
 }
 .form {

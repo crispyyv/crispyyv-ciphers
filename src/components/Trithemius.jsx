@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { trithemiusHelper } from "../helpers/trithemiusHelpers";
+import {
+  findConstHelper,
+  trithemiusHelper,
+} from "../helpers/trithemiusHelpers";
 import { CipherForm } from "./layouts/CipherForm";
 import { SlideButton } from "./ui/SlideButton";
 import { TextInput } from "./ui/TextInput";
@@ -10,36 +13,48 @@ export const Trithemius = () => {
     b: "",
     c: "",
   });
+
+  const [findText, setFindText] = useState({
+    plain: "",
+    encrypted: "",
+  });
+  const [findConst, setFindConst] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [decryptText, setDecryptText] = useState("");
   const [encryptText, setEncryptText] = useState("");
   const [isQuadro, setIsQuadro] = useState(false);
   const [result, setResult] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let txt;
     console.log(encryptText);
     setShowResult(true);
     if (isDecrypt) {
-      console.log("decrypt");
-      txt = trithemiusHelper(
-        decryptText,
-        parseInt(key.a),
-        parseInt(key.b),
-        isQuadro ? parseInt(key.c) : null,
-        false
-      );
-      setResult(txt);
+      if (findConst) {
+        const { plain, encrypted } = findText;
+        console.log("I WILL FIND YOU");
+        const result = findConstHelper(plain, encrypted);
+        console.log(result);
+        txt = `You'r const: ${result}`;
+      } else {
+        txt = trithemiusHelper(
+          decryptText,
+          parseInt(key.a),
+          parseInt(key.b),
+          isQuadro ? parseInt(key.c) : null,
+          false
+        );
+      }
     } else {
-      console.log("encrpyt");
       txt = trithemiusHelper(
         encryptText,
         parseInt(key.a),
         parseInt(key.b),
         isQuadro ? parseInt(key.c) : null
       );
-      setResult(txt);
     }
+    setResult(txt);
     console.log("Result of encrypting: ", txt);
   };
   const handleSetKey = (e) => {
@@ -56,19 +71,30 @@ export const Trithemius = () => {
   const slideButton = () => {
     setShowResult(false);
     setIsDecrypt(!isDecrypt);
+    setFindConst(false);
   };
   const saveText = (e) => {
+    e.persist();
     setShowResult(false);
     if (isDecrypt) {
-      setDecryptText(e.target.value);
+      findConst
+        ? setFindText((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+          }))
+        : setDecryptText(e.target.value);
     } else {
       setEncryptText(e.target.value);
     }
   };
+  console.log(findText);
 
-  const handleSlide = () => {
-    setIsQuadro(!isQuadro);
+  const handleSlide = (e) => {
+    e.target.id === "constants"
+      ? setFindConst(!findConst)
+      : setIsQuadro(!isQuadro);
   };
+  console.log(findConst);
   return (
     <>
       <CipherForm handleSubmit={handleSubmit} shift={key} isDecrypt={true}>
@@ -87,26 +113,30 @@ export const Trithemius = () => {
             placeholder="Decrypt?"
           />
         </div>
-        <TextInput
-          placeholder="Set A"
-          onChange={handleSetKey}
-          value={key.a}
-          name="a"
-        />
-        <TextInput
-          placeholder="Set B"
-          onChange={handleSetKey}
-          value={key.b}
-          name="b"
-        />
-        {isQuadro ? (
-          <TextInput
-            name="c"
-            placeholder="Set c"
-            onChange={handleSetKey}
-            value={key.c}
-          />
-        ) : null}
+        {findConst ? null : (
+          <>
+            <TextInput
+              placeholder="Set A"
+              onChange={handleSetKey}
+              value={key.a}
+              name="a"
+            />
+            <TextInput
+              placeholder="Set B"
+              onChange={handleSetKey}
+              value={key.b}
+              name="b"
+            />
+            {isQuadro ? (
+              <TextInput
+                name="c"
+                placeholder="Set c"
+                onChange={handleSetKey}
+                value={key.c}
+              />
+            ) : null}
+          </>
+        )}
         {!isDecrypt ? (
           <TextInput
             placeholder="Encrypt"
@@ -114,11 +144,37 @@ export const Trithemius = () => {
             value={encryptText}
           />
         ) : (
-          <TextInput
-            placeholder="Decrypt"
-            onChange={saveText}
-            value={decryptText}
-          />
+          <>
+            {findConst ? (
+              <>
+                <TextInput
+                  name="plain"
+                  placeholder="Set plain text"
+                  onChange={saveText}
+                  value={findText.plain}
+                />
+                <TextInput
+                  name="encrypted"
+                  placeholder="Set encrypted text"
+                  onChange={saveText}
+                  value={findText.decryptResult}
+                />
+              </>
+            ) : (
+              <>
+                <TextInput
+                  placeholder="Decrypt"
+                  onChange={saveText}
+                  value={decryptText}
+                />
+              </>
+            )}
+            <SlideButton
+              placeholder="Don't know const?"
+              id="constants"
+              onChange={handleSlide}
+            />
+          </>
         )}
       </CipherForm>
 

@@ -18,7 +18,6 @@ export const trithemiusHelper = (string, a, b, c, encrypt = true) => {
     }
     m = alphabet.indexOf(stringMas[i]);
     L = alphabet[(m + key) % n];
-    console.log("m:", m, "p:", p, "key:", key, "L:", L);
     outStr += encrypt ? L : alphabet[recurs(m, key) % n];
   }
 
@@ -33,4 +32,21 @@ const recurs = (m, key) => {
     res = m - key + n * i;
   }
   return m - key > 0 ? m - key : res;
+};
+
+export const findConstHelper = (plain, encrypted) => {
+  let a;
+  let b;
+  let forTest = "";
+  for (a = 0; a < 10; a++) {
+    for (b = 0; b < 10; b++) {
+      console.log(`a: ${a}, b:${b}`);
+      forTest = trithemiusHelper(plain, a, b);
+      console.log(forTest, forTest === encrypted);
+      if (trithemiusHelper(plain, a, b) === encrypted) {
+        console.log(a, b);
+        return [a, b];
+      }
+    }
+  }
 };

@@ -5,6 +5,7 @@ export const SlideButton = ({ onChange, id, placeholder }) => {
     <div>
       <label htmlFor={id}>{placeholder}</label>
       <input
+        className="btn-slide"
         id={id}
         type="checkbox"
         placeholder={placeholder}
