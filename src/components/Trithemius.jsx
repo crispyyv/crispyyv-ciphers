@@ -101,18 +101,20 @@ export const Trithemius = () => {
         <span className="attention">
           *Attention this page for Trithemius cipher*
         </span>
-        <div className="flex-row">
-          <SlideButton
-            onChange={handleSlide}
-            id="quadro"
-            placeholder="Quadro?"
-          />
-          <SlideButton
-            onChange={slideButton}
-            id="decrypt"
-            placeholder="Decrypt?"
-          />
-        </div>
+        {findConst ? null : (
+          <div className="flex-row">
+            <SlideButton
+              onChange={handleSlide}
+              id="quadro"
+              placeholder="Quadro?"
+            />
+            <SlideButton
+              onChange={slideButton}
+              id="decrypt"
+              placeholder="Decrypt?"
+            />
+          </div>
+        )}
         {findConst ? null : (
           <>
             <TextInput
