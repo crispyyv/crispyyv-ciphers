@@ -4,6 +4,7 @@ import { Ceaser } from "./components/Ceaser";
 import { Home } from "./components/Home";
 import NavBar from "./components/NavBar";
 import { Trithemius } from "./components/Trithemius";
+import { Vingenere } from "./components/Vingenere";
 import "./styles/main.scss";
 export const App = () => {
   return (
@@ -19,6 +20,9 @@ export const App = () => {
           </Route>
           <Route path="/trithemius">
             <Trithemius />
+          </Route>
+          <Route path="/vingenere">
+            <Vingenere />
           </Route>
         </Switch>
       </div>

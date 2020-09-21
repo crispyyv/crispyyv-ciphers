@@ -16,6 +16,9 @@ const NavBar = ({ location }) => {
           <li className="nav__item">
             <Link to="/trithemius">Trithemius</Link>
           </li>
+          <li className="nav__item">
+            <Link to="/vingenere">Vingenere</Link>
+          </li>
         </ul>
       </div>
     </>

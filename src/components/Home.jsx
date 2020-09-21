@@ -13,6 +13,9 @@ export const Home = () => {
         <li>
           <Link to="/trithemius">Trithemius</Link>
         </li>
+        <li>
+          <Link to="/vingenere">Vingenere</Link>
+        </li>{" "}
       </ul>
       {/* <span className="preview__special">
         Also I'm learning now, wait please

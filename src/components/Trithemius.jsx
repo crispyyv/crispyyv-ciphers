@@ -98,9 +98,6 @@ export const Trithemius = () => {
   return (
     <>
       <CipherForm handleSubmit={handleSubmit} shift={key} isDecrypt={true}>
-        <span className="attention">
-          *Attention this page for Trithemius cipher*
-        </span>
         {findConst ? null : (
           <div className="flex-row">
             <SlideButton

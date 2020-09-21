@@ -16,6 +16,12 @@
 body {
   background: $main-color;
 }
+.vingenere {
+  @include input-styles;
+}
+textarea {
+  resize: none;
+}
 .mt {
   margin-top: 10px;
 }
@@ -29,6 +35,10 @@ body {
   // margin: 20px 0 40px 0;
   @include flex(column, center, center);
   height: 50vh;
+  &__title {
+    text-align: center;
+    font-size: 2rem;
+  }
   &__subtitle {
     margin: 1rem 0;
     font-size: 1.4rem;
@@ -163,6 +173,7 @@ body {
   padding: 10px;
   height: 100%;
   &__item {
+    text-align: center;
     padding: 0 0.5rem;
     font-size: 2rem;
     a {
@@ -181,10 +192,45 @@ body {
   margin-bottom: 2rem;
   font-size: 1.5rem;
 }
+.vingenere {
+  margin: 0 auto;
+  @include flex(column);
 
+  .buttons {
+    max-width: 600px;
+    width: 100%;
+    @include flex(row, space-between);
+  }
+}
 .flex-row {
-  @include flex("row");
+  @include flex(row);
   div {
     margin: 1rem 2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .background {
+    height: 3rem;
+  }
+  .nav {
+    // @include flex(column);
+    align-items: unset;
+    flex-flow: row wrap;
+    padding: 0.2rem;
+
+    &__item {
+      width: 50%;
+      margin: 0.1rem 0;
+      font-size: 0.8rem;
+    }
+  }
+  .buttons {
+    @include flex(column);
+  }
+
+  .center {
+    max-width: 600px;
+    width: 100%;
   }
 }
