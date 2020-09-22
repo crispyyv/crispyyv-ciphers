@@ -1,8 +1,8 @@
 ### Cipher PWA
 
-#### [Test me](https://ceaser-cipher.vercel.app/)
+#### [Test me](https://ciphers-crispyyv.vercel.app/)
 
-You can encrypt and decrypt any **ENGLISH TEXT** using Trithemius and Ceaser code.
+You can encrypt and decrypt any **ENGLISH TEXT** using Trithemius,Vingenere and Ceaser code.
 
 Steps for run:
 
